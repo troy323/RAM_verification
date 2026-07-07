@@ -71,8 +71,9 @@ The testbench follows a **layered, class-based architecture**:
         ├── ram_if.sv
         ├── reference.sv
         ├── scoreboard.sv
-        ├── testbench.sv
+        ├── testbench.sv   
         └── transaction.sv
+ 
 ```
 
 ## How to Run
