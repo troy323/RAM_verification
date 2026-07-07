@@ -63,20 +63,29 @@ The testbench follows a **layered, class-based architecture**:
     ├── design
     │   └── ram.sv
     └── test_bench
-        └── ram_tb.sv
+        ├── driver.sv
+        ├── environment.sv
+        ├── generator.sv
+        ├── input_monitor.sv
+        ├── output_monitor.sv
+        ├── ram_if.sv
+        ├── reference.sv
+        ├── scoreboard.sv
+        ├── testbench.sv
+        └── transaction.sv
 ```
 
 ## How to Run
 
 ### With Questa SIM
 ```bash
-vlog -sv src/test_bench/ram_tb.sv src/design/ram.sv
+vlog -sv src/test_bench/testbench.sv src/design/ram.sv
 vsim -c top -do "run -all; quit"
 ```
 
 ### With Coverage Enabled
 ```bash
-vlog -sv +cover src/test_bench/ram_tb.sv src/design/ram.sv
+vlog -sv +cover src/test_bench/testbench.sv src/design/ram.sv
 vsim -c top -coverage -do "coverage save -onexit covReport; run -all; quit"
 ```
 
