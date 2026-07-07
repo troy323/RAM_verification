@@ -110,9 +110,9 @@ All test cases **PASSED** with zero mismatches.
 - [Test Plan](docs/test_plan.md)
 - [Verification Report](docs/verification_report.md)
 
-## Author
 
-Mirafra LP01
+
+
 
 ## License
 
