@@ -1,10 +1,49 @@
-\include "ram_if.sv"
-\include "transaction.sv"
-\include "generator.sv"
-\include "driver.sv"
-\include "input_monitor.sv"
-\include "output_monitor.sv"
-\include "reference.sv"
-\include "scoreboard.sv"
-\include "environment.sv"
-module top;    bit clk, reset;    always #5 clk = ~clk;    ram_if rif(clk, reset);    RAM dut(     .clk       (clk),     .reset     (reset),     .address   (rif.address),     .data_in   (rif.data_in),     .write_enb (rif.write_enb),     .read_enb  (rif.read_enb),     .data_out  (rif.data_out)   );    environment env;    initial begin     reset = 0;     #20;     reset = 1;      env = new(rif.drv, rif.mi, rif.mo);     env.build();     env.run();     env.wait_for_done();     env.post_run();     $finish;   end    initial begin     $dumpfile("dump.vcd");     $dumpvars(0, top);   end  endmodule
+`include "interface.sv" 
+
+`include "ram_package.sv" 
+
+import ram_package::*;
+module top;
+  bit clk, reset;
+
+  // Clock generation: 10ns period
+  always #5 clk = ~clk;
+  
+  initial begin 
+     reset = 0;
+    #20;
+    reset = 1;
+  end 
+    
+
+  ram_if rif(clk, reset);
+
+  RAM dut(
+    .clk       (clk),
+    .reset     (reset),
+    .address   (rif.address),
+    .data_in   (rif.data_in),
+    .write_enb (rif.write_enb),
+    .read_enb  (rif.read_enb),
+    .data_out  (rif.data_out)
+  );
+  
+//   test t;
+//   read_test t2;
+//   write_test t3;
+  test_regression tp;
+  
+
+  initial begin
+    tp=new(rif.drv, rif.mi, rif.mo);
+    tp.run();
+    $finish;
+  end
+
+  // Waveform dump
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars(0, top);
+  end
+
+endmodule
