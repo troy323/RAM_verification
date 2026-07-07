@@ -2,10 +2,6 @@
 
 ---
 
-**Author:** Mirafra LP01
-**Employee ID / Roll Number:** —
-**Project Title:** Parameterized Synchronous RAM — RTL Design & Self-Checking Verification
-
 ---
 
 ## 1. Project Introduction
